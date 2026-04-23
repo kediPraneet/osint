@@ -102,7 +102,7 @@ def cached_scrape_multiple(filtered: list, threads: int):
 
 # Streamlit page configuration
 st.set_page_config(
-    page_title="Robin: AI-Powered Dark Web OSINT Tool",
+    page_title="EY NOX: AI-Powered Dark Web OSINT Tool",
     page_icon="🕵️‍♂️",
     initial_sidebar_state="expanded",
 )
@@ -124,11 +124,20 @@ st.markdown(
 
 
 # Sidebar
-st.sidebar.title("Robin")
+try:
+    _ey_logo_b64 = base64.b64encode(Path(".github/assets/ey.png").read_bytes()).decode()
+    st.sidebar.markdown(
+        f"""
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:0.25rem; line-height:1;">
+            <span style="font-size:2rem; font-weight:600;">EY NOX</span>
+            <img src="data:image/png;base64,{_ey_logo_b64}" width="30" />
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+except Exception:
+    st.sidebar.markdown("### EY NOX")
 st.sidebar.text("AI-Powered Dark Web OSINT Tool")
-st.sidebar.markdown(
-    """Made by [Apurv Singh Gautam](https://www.linkedin.com/in/apurvsinghgautam/)"""
-)
 st.sidebar.subheader("Settings")
 def _env_is_set(value) -> bool:
     return bool(value and str(value).strip() and "your_" not in str(value))
@@ -147,7 +156,7 @@ if not model_options:
     st.sidebar.error(
         "⛔ **No LLM models available.**\n\n"
         "No API keys or local providers are configured. "
-        "Set at least one in your `.env` file and restart Robin.\n\n"
+        "Set at least one in your `.env` file and restart EY NOX.\n\n"
         "See **Provider Configuration** below for details."
     )
     st.stop()
@@ -295,10 +304,8 @@ else:
     st.sidebar.caption("No saved investigations yet.")
 
 
-# Main UI - logo and input
-_, logo_col, _ = st.columns(3)
-with logo_col:
-    st.image(".github/assets/robin_logo.png", width=200)
+# Main UI - heading and input
+st.markdown("<h1 style='text-align: center;'>EY NOX</h1>", unsafe_allow_html=True)
 
 # Display text box and button
 with st.form("search_form", clear_on_submit=True):

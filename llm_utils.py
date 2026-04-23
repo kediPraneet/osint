@@ -150,6 +150,14 @@ _llm_config_map = {
             'api_key': OPENROUTER_API_KEY  # Use OpenRouter API key
         }
     },
+    'minimax-m2.5-openrouter': {
+    'class': ChatOpenAI,
+    'constructor_params': {
+        'model_name': 'minimax/minimax-m2.5',
+        'base_url': OPENROUTER_BASE_URL,
+        'api_key': OPENROUTER_API_KEY
+    }
+},
     # 'llama3.2': {
     #     'class': ChatOllama,
     #     'constructor_params': {'model': 'llama3.2:latest', 'base_url': OLLAMA_BASE_URL}
